@@ -12,7 +12,15 @@ TODO:
   
 ## Usage
 
-TODO: Write usage instructions here
+assuming rbenv, and thin web server
+
+    
+Clone repository, then
+
+```
+  cd ya_bookmark_ap
+  bundle exec rackup -s thin -p 4567 -o 127.0.0.1
+```
 
 ## Development
 
