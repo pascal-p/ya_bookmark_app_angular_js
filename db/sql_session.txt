@@ -1,8 +1,0 @@
--- select label, title, url
--- from bookmarks B
--- inner join bkmk_taggings BT
--- on B.id = BT.bookmark_id 
--- inner join tags T
--- on BT.tag_id = T.id;
-
-select * from users;
