@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# require_relative '../helpers/bookmark.rb'
-
 class BookmarksController < ApplicationController
   helpers BookmarkHelper
 

@@ -11,7 +11,7 @@ end
 
 require 'json'
 require 'sinatra/base'           # instead of require 'sinatra' => modular Sinatra App
-
+#
 require "sinatra/contrib"
 require "sinatra/respond_with"   # from sinatra-contrib
 require 'sinatra/content_for'    #   "    "       "
@@ -21,15 +21,16 @@ require 'data_mapper'
 require 'dm-migrations'
 require "dm-serializer"          # resp. will be json serialized
 #
-
 require 'erubis'                 #require 'erb'  # instead of slim
 require 'tilt/erubis'
 #
 #
-Dir.glob('./{helpers,controllers,models}/*.rb').each {|f| require f}
+Dir.glob('./{helpers,models}/**/*.rb').each {|f| require f}
+# WARN: Hum... This won't allways work! application_controller needs to be loaded
+# before bookmark_controller
+Dir.glob('./controllers/**/*.rb').sort.each {|f| require f}
 
-
-class MyApp < Sinatra::Base
+class MyApp < Sinatra::Application
 
   self.configure(:development) do
     DataMapper::Logger.new($stdout, :debug)
@@ -71,7 +72,7 @@ class MyApp < Sinatra::Base
   #
   # Global setup for this app
   #
-  SITE_TITLE = "Bookmark REST API (test)"
+  SITE_TITLE = "Bookmark REST API"
   #
   set :root,          File.join(File.dirname(__FILE__), '..')
   set :app_file,      __FILE__
