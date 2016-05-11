@@ -3,9 +3,17 @@
 #
 
 require "rspec"
+require 'rack/test'
 
-RSpec.configure do |config|
-  config.expect_with :rspec do |c|
+require 'data_mapper'
+# require 'dm-migrations'
+
+ENV['RACK_ENV'] = 'test'
+
+RSpec.configure do |conf|
+  conf.include Rack::Test::Methods
+
+  conf.expect_with(:rspec) do |c|
     c.syntax = :expect
   end
 end

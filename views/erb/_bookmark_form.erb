@@ -1,0 +1,23 @@
+<div class="form-group">
+  <label>URL: </label>
+  <input type="text" name="url"
+         placeholder="URL http://... or https://..."
+         value="<%= @bookmark && @bookmark.url %>">
+</div>
+
+<div class="form-group">
+  <label>Title:  </label>
+  <input type="text" name="title"
+         placeholder="your title"
+         value="<%= @bookmark && @bookmark.title %>">
+</div>
+
+<div class="form-group">
+  <label>Tags: </label>
+  <input type="text" name="tags_as_str"
+         placeholder="your tags"
+         value="<%= @bookmark && @bookmark.tag_lst.join(', ') %>">
+</div>
+
+<input type="submit" name="save" value="Save" class="btn btn-default btn-xs">
+<a href="/" class="btn btn-danger btn-xs">Cancel</a>

@@ -1,0 +1,27 @@
+<header>
+  <h2>List of Bookmarks</h2>
+</header>
+
+<section>
+  <span class="pull-right">
+    <a href="/bookmark/new" class="btn btn-primary btn-xs">Add New Bookmark</a>
+  </span>
+  <hr class="clearfix">
+  <ul class="list-group">
+    <% @bookmarks.each do |bookmark| %>
+      <li class="list-group-item">
+        <a href="/bookmarks/<%= bookmark.id %>/edit" class="btn btn-default btn-xs">Edit</a>
+
+        <!-- DELETE a bookmark entry -->
+        <form action="/bookmarks/<%= bookmark.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Delete" class="btn btn-danger btn-xs">
+        </form>
+        |
+        <%=h bookmark.title %>
+        (<a href="<%= bookmark.url %>"><%= bookmark.url %></a> |
+        <%= @bookmark = bookmark ; erb(:_bookmark_tags, bookmark: bookmark) %>)
+      </li>
+    <% end %>
+  </ul>
+</section>
