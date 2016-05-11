@@ -9,8 +9,8 @@
 /config/local_env.yml
 
 # Ignore all logfiles and tempfiles.
-/log/*
-!/log/.keep
+/logs/*
+!/logs/.keep
 /tmp
 
 /public/uploads/test
@@ -19,3 +19,8 @@
 /spec/uploads
 
 /notes
+
+/db/bookmarks.db.OK
+/db/bookmarks_test.db
+/db/sql_session.txt
+
