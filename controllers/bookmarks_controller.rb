@@ -10,7 +10,8 @@ class BookmarksController < ApplicationController
 
   before do
     # $logger.debug " [generic before filter] ==> params: #{params.inspect}"
-    # $logger.debug " ===> request is #{request.inspect} "
+    # $logger.debug " ===> request is #{request.body.inspect} "
+    # $logger.debug " ===> params     #{params.inspect} "
     # $logger.debug " ===> env is #{env.inspect} "
   end
 
@@ -37,7 +38,10 @@ class BookmarksController < ApplicationController
   #  Not using before filter
   #
   post "/bookmarks" do
+    request.body.rewind
+    params = JSON.parse request.body.read
     input = hslice params, "url", "title"
+
     @bookmark = Bookmark.new input
     # A bit of validation with the model constraints
     status = if @bookmark.save
@@ -72,6 +76,36 @@ class BookmarksController < ApplicationController
   #
   # Read Part -
   #
+
+  # =========================================
+  # Frontend access  STARTS
+  #
+  get "/" do
+    redirect "/example/base"
+  end
+
+  get "/example/:example" do
+    @examples = [
+      {example: "base", label:  "Base"},
+      {example: "validation", label: "Validation"},
+      {example: "tagfilter", label: "Tag Filter"},
+      {example: "routing", label: "Routing"}
+    ]
+    @example = params[:example]
+
+    @examples.each do |example|
+      if example[:example] == @example
+        example[:active] = true
+      end
+    end
+
+    @example_template = IO.read("views/#{@example}.html")
+
+    erb :index
+  end
+  #
+  # Frontend access  ENDS
+  # =========================================
 
   #
   # edit - order matters, this clause should comme before %r{/bookmarks/\d+}

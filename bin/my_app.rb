@@ -74,10 +74,13 @@ class MyApp < Sinatra::Application
   #
   SITE_TITLE = "Bookmark REST API"
   #
-  set :root,          File.join(File.dirname(__FILE__), '..')
-  set :app_file,      __FILE__
-  set :views,         settings.root + '/views/erb'
-  set :public_folder, settings.root + '/resources'
+  # The following is defined in controllers/application_controller.rb
+  #
+  #set :root,          File.join(File.dirname(__FILE__), '..')
+  #set :app_file,      __FILE__
+  #set :views,         settings.root + '/views/erb'
+  #set :public_folder, settings.root + '/public' #set :public_folder, settings.root + '/resources'
+
   # The following only applied with erubis
   set :erb,           escape_html: true
 

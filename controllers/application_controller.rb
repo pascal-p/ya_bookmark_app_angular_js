@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Application
   set :root,          File.realpath(File.join(File.dirname(__FILE__), '..'))
   set :app_file,      __FILE__
   set :views,         settings.root + '/views/erb'
-  set :public_folder, settings.root + '/assets'
+  set :public_folder, settings.root + '/public'   # set :public_folder, settings.root + '/assets'
   set :environment,   :development
 
   # Views - customization
