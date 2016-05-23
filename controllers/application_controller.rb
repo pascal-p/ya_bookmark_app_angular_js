@@ -44,10 +44,16 @@ class ApplicationController < Sinatra::Application
     # $logger = Logger.new(STDOUT)
   end
 
+  # end-to-end testing 
+  get "/e2e-test-runner" do
+    # $logger.debug "Intercepted call to e2e-test-runner.html"
+    send_file settings.public_folder + "/test/e2e-test-runner.html"
+  end
+  
   # will be used to display 404 error pages
   not_found do
     title 'Not Found!'
     erb :not_found
   end
-
+  
 end

@@ -9,10 +9,9 @@ class BookmarksController < ApplicationController
   end
 
   before do
-    # $logger.debug " [generic before filter] ==> params: #{params.inspect}"
-    # $logger.debug " ===> request is #{request.body.inspect} "
-    # $logger.debug " ===> params     #{params.inspect} "
-    # $logger.debug " ===> env is #{env.inspect} "
+    # $logger.debug " ===> request #{request.inspect} "
+    # $logger.debug " ===> params  #{params.inspect} "
+    # $logger.debug " ===> env     #{env.inspect} "
   end
 
   #
