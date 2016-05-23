@@ -8,7 +8,6 @@ gem 'dm-sqlite-adapter', '~> 1.2'
 gem 'data_mapper', '~> 1.2'
 
 gem 'rest-client', '~> 1.8'
-gem 'haml', '~> 4.0', '>= 4.0.7'
 gem 'digest', '~> 0.0.1'
 
 gem 'sinatra', '~> 1.4', '>= 1.4.7'
@@ -23,8 +22,9 @@ gem 'rack_csrf', '~> 2.5'
 
 gem 'thin', '~> 1.6', '>= 1.6.4'
 
-gem 'sinatra-contrib', '~> 1.4', '>= 1.4.7' # to handle accept header JSON or HTML 
+gem 'sinatra-contrib', '~> 1.4', '>= 1.4.7' # to handle accept header JSON or HTML
 
+gem 'haml', '~> 4.0', '>= 4.0.7'
 gem 'erubis', '~> 2.7'
 gem 'less', '~> 2.6'
 gem 'therubyracer', '~> 0.12.2'   # => libv8
@@ -45,8 +45,10 @@ gem 'creole', '~> 0.5.0'
 gem 'wikicloth', '~> 0.8.3'
 gem 'markaby', '~> 0.8.0'
 #
+#gem 'bower-rails'
 #
-group :development, :test do     
+group :development, :test do
+  # gem 'rake', '~> 11.1', '>= 11.1.2' # NO`
   gem 'rspec', '~> 3.4'
   gem 'rack-test', '~> 0.6.3'
-end                              
+end

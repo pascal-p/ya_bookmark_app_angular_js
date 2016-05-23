@@ -24,3 +24,4 @@
 /db/bookmarks_test.db
 /db/sql_session.txt
 
+/rake/*
