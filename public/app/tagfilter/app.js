@@ -91,3 +91,10 @@ app.controller("BookmarkListController",
     $scope.editBookmark = editBookmark;
   }
 );
+
+app.controller("TagFilterController", function($scope, state) {
+  $scope.bookmarkFilter = state.bookmarkFilter;
+  $scope.clearFilter = function() {
+    state.bookmarkFilter.filterTag = "";
+  };
+});

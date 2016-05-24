@@ -9,7 +9,7 @@
             class="btn btn-sm btn-danger">Delete</button>
 
     <a href="{{bookmark.url}}">{{bookmark.title}}</a>
-    ( <a href="{{bookmark.url}}">{{bookmark.url}}</a> ) |
+    (<a href="{{bookmark.url}}">{{bookmark.url}}</a>) |
 
     <span ng-repeat="tag in bookmark.tag_lst">
       <a href="#" ng-click="filterBy(tag)">{{tag}}</a> |
