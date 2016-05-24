@@ -21,7 +21,7 @@
 /notes
 
 /db/bookmarks.db.OK
-/db/bookmarks_test.db
+/db/bookmarks_*.db
 /db/sql_session.txt
 
 /rake/*

@@ -40,11 +40,10 @@ class BookmarksController < ApplicationController
     request.body.rewind
     params = JSON.parse request.body.read
     input = hslice params, "url", "title"
-
     @bookmark = Bookmark.new input
     # A bit of validation with the model constraints
     status = if @bookmark.save
-               add_tags(@bookmark)
+               add_tags(@bookmark, params)
                :ok # Created
              else
                :ko
@@ -100,7 +99,7 @@ class BookmarksController < ApplicationController
 
     @example_template = IO.read("views/#{@example}.html")
 
-    erb :index
+    erb :index, layout: false
   end
   #
   # Frontend access  ENDS
@@ -137,12 +136,13 @@ class BookmarksController < ApplicationController
   end
 
   [ "/", %r{/bookmarks[/]?} ].each do |url|
-    get(url, provides: [:html, :json]) do
+    get(url) do # get(url, provides: [:html, :json]) do
       ## return json or HTML depending on header content
       @bookmarks = get_all_bookmarks
-      resp = respond_with :bookmark_index, @bookmarks
+      # resp = respond_with :bookmark_index, @bookmarks # with_tag_list}
       # \__ Accept: application/json or HTML view for the Accept: text/html
-      resp
+      # resp
+      my_render(request, :bookmark_index, @bookmarks)
     end
   end
 

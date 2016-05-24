@@ -19,9 +19,13 @@ module BookmarkHelper
     Rack::Utils.escape_html(text)
   end
 
-  def add_tags(bookmark)
-    #
-    labels = (params["tags_as_str"] || "").split(",").map(&:strip).map(&:downcase).sort     # get the tags
+  def add_tags(bookmark, params)
+    # get the tags
+    labels = if params.has_key?('tagList') && params['tagList'].is_a?(Array)
+               params['tagList']
+             else
+               (params["tags_as_str"] || "").split(",").map(&:strip).map(&:downcase).sort
+             end
     #
     # Next, by iterating over the bookmark’s previously existing tags, we compare
     # with the new list of tags. We’ll keep track of matching tags and delete those
