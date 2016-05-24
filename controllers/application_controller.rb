@@ -3,11 +3,11 @@ require 'logger'
 
 class ApplicationController < Sinatra::Application
   helpers ApplicationHelper
-  helpers Sinatra::ContentFor
-  helpers Sinatra::RespondWith
+  #helpers Sinatra::ContentFor
+  #helpers Sinatra::RespondWith
   #
   register Sinatra::Namespace
-  register Sinatra::Contrib
+  #register Sinatra::Contrib
 
   SITE_TITLE = "Bookmark REST API"
 

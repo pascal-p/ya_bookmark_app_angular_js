@@ -1,5 +1,6 @@
 Bookmark:
 <form class="form-horizontal" ng-submit="saveBookmark(formBookmark.bookmark)">
+  
   <div class="form-group">
     <label> URL:
       <input type="text" ng-model="formBookmark.bookmark.url" name="url">
@@ -14,10 +15,10 @@ Bookmark:
 
   <div class="form-group">
     <label> Tags: <br /> (separated by commas)
-      <input type="text" ng-model="formBookmark.bookmark.tagList" ng-list name="tagList">
+      <input type="text" ng-model="formBookmark.bookmark.tag_lst" ng-list name="tagList">
     </label>
   </div>
-  
+
   <input type="submit" class="btn btn-sm btn-primary" value="Save">
   <input type="button" class="btn btn-sm" ng-click="clearForm()" value="Clear">
 

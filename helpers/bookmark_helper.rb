@@ -21,8 +21,8 @@ module BookmarkHelper
 
   def add_tags(bookmark, params)
     # get the tags
-    labels = if params.has_key?('tagList') && params['tagList'].is_a?(Array)
-               params['tagList']
+    labels = if params.has_key?('tag_lst') && params['tag_lst'].is_a?(Array)
+               params['tag_lst']
              else
                (params["tags_as_str"] || "").split(",").map(&:strip).map(&:downcase).sort
              end
