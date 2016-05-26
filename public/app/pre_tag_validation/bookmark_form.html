@@ -1,0 +1,53 @@
+Bookmark Pre Tag Validation:
+<form novalidate name="bookForm"
+      ng-submit="bookForm.$valid && saveBookmark(formBookmark.bookmark)" class="form-horizontal">
+  
+  <div class="form-group has-feedback"
+       ng-class="{
+                 'has-error':   bookForm.url.$invalid && bookForm.url.$dirty,
+                 'has-success': bookForm.url.$valid   && bookForm.url.$touched
+                 }">
+    <label> URL:</label>
+    <input type="url" ng-model="formBookmark.bookmark.url" name="url"
+           required
+           ng-pattern="urlRegExp">
+       
+    <p class="help-block" ng-messages="bookForm.url.$error">
+      <span ng-message="required">URL is required</span>
+      <span ng-message="pattern">URL must conform to URL format http[s]://...</span>
+    </p>
+  </div>
+  
+  <!--
+      <tt>url(text)                = {{url}}</tt><br/>
+      <tt>bookForm.url.$valid      = {{bookForm.url.$valid}}</tt><br/>
+      <tt>bookForm.url.$invalid    = {{bookForm.url.$invalid}}</tt><br/>
+      <tt>bookForm.url.$dirty      = {{bookForm.url.$dirty}}</tt><br/>
+      <tt>bookForm.url.$touched    = {{bookForm.url.$touched}}</tt><br/>
+      -->
+  <!-- <tt>bookForm.url.$error      = {{bookForm.url.$error}}</tt><br/> -->
+  <!-- \__ set ng-message to "pattern"-->
+  <!--
+      <tt>bookForm.$valid          = {{bookForm.$valid}}</tt><br/>
+      <tt>bookForm.$error.required = {{!!bookForm.$error.required}}</tt><br/>
+      <tt>bookForm.$error.url = {{!!bookForm.$error.url}}</tt><br/>
+      -->
+  
+  <div class="form-group has-feedback"
+       ng-class="{
+                 'has-error': bookForm.title.$invalid && bookForm.title.$dirty,
+                 'has-success': bookForm.title.$valid && bookForm.title.$touched
+                 }">
+    <label> Title:</label>
+    <input type="text" ng-model="formBookmark.bookmark.title" name="title"
+           required>    
+    <p class="help-block" ng-messages="bookForm.title.$error">
+      <span ng-message="required">Title is required</span>
+    </p>
+  </div>
+    
+  <input type="submit" class="btn btn-sm btn-primary"
+         ng-disabled="bookForm.$invalid || bookForm.$pristine" value="Save">
+  <input type="button" class="btn btn-sm" ng-click="clearForm()" value="Clear">
+
+</form>

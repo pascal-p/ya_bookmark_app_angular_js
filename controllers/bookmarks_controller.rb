@@ -85,19 +85,21 @@ class BookmarksController < ApplicationController
   get "/example/:example" do
     @examples = [
       {example: "base", label:  "Base"},
-      {example: "validation", label: "Validation"},
+      {example: "pre_tag_validation", label: "Pre Tag Validation"},
       {example: "tagfilter", label: "Tag Filter"},
       {example: "routing", label: "Routing"}
     ]
     @example = params[:example]
 
-    @examples.each do |example|
-      if example[:example] == @example
-        example[:active] = true
+    @examples.each do |ex|
+      if ex[:example] == @example
+        ex[:active] = true
+        break
       end
     end
 
     @example_template = IO.read("views/#{@example}.html")
+
 
     erb :index, layout: false
   end

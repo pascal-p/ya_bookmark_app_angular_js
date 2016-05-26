@@ -8,7 +8,7 @@ app.factory("Bookmark", function($resource) {
 });
 
 //
-// defined the bookmarks service to provide the bookmark list
+// defined the bookmarks service to provide the bookmark list (link with backend)
 //
 app.factory("bookmarks", function(Bookmark) {
   return Bookmark.query();
@@ -29,6 +29,29 @@ app.service("state", function(Bookmark) {
 //
 app.factory("saveBookmark", function(bookmarks, state) {
   return function(bookmark) {
+    var new_bk = false,
+        ok = false;
+    if (!bookmark.id) { new_bk = true; }
+    bookmark.$save(
+      function success(response) {
+        console.log("Success:" + JSON.stringify(response));
+        ok = true; // closure
+      },
+      function error(errorResponse) {
+        console.log("Error:" + JSON.stringify(errorResponse));
+      }
+    );
+    if (new_bk && ok) {
+      bookmarks.push(bookmark);
+      state.clearForm();         // clear from only if the save on the backend was successfull
+      console.log("ok - adding bookmark to local list and clearing form")
+    }
+  };
+});
+
+/*
+app.factory("saveBookmark", function(bookmarks, state) {
+  return function(bookmark) {
     if (!bookmark.id) {
       bookmarks.push(bookmark);
     }
@@ -36,6 +59,7 @@ app.factory("saveBookmark", function(bookmarks, state) {
     state.clearForm();
   };
 });
+*/
 
 //
 // service to delete a bookmark entries (on the backend) and update
