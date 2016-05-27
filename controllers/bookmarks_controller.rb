@@ -11,7 +11,6 @@ class BookmarksController < ApplicationController
   def get_json_parms
     request.body.rewind
     params = JSON.parse request.body.read
-    $logger.debug " ==> params: #{params.inspect}"
     [hslice(params, "url", "title"), params]
   end
 
@@ -45,7 +44,7 @@ class BookmarksController < ApplicationController
   #
   post "/bookmarks" do
     input, params =  get_json_parms
-    $logger.debug "===> post /bookmarks - params: #{params.inspect}"
+    #$logger.debug "===> post /bookmarks - params: #{params.inspect}"
     @bookmark = Bookmark.new input
     #
     # A bit of validation with the model constraints
@@ -190,11 +189,11 @@ class BookmarksController < ApplicationController
     end
     _json if _json != -1
   }
-  
+
   put %r{/bookmarks/\d+} do
     LBD.call(self, @bookmark)
   end
-  
+
   post %r{/bookmarks/\d+} do
     LBD.call(self, @bookmark)
   end
