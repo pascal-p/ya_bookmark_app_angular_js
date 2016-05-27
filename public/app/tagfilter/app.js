@@ -1,4 +1,9 @@
-var app = angular.module("App_tagfilter", ["ngResource", "App_base"]);
+var app = angular.module("App_tagfilter",
+                         [
+                           "ngResource",
+                           "App_base"
+                         ]
+                        );
 
 //
 // A service to define a common state (updated from App_base)

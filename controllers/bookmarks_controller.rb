@@ -8,6 +8,13 @@ class BookmarksController < ApplicationController
     {:methods => [:tag_lst]}
   end
 
+  def get_json_parms
+    request.body.rewind
+    params = JSON.parse request.body.read
+    $logger.debug " ==> params: #{params.inspect}"
+    [hslice(params, "url", "title"), params]
+  end
+
   before do
     # $logger.debug " ===> request #{request.inspect} "
     # $logger.debug " ===> params  #{params.inspect} "
@@ -37,9 +44,8 @@ class BookmarksController < ApplicationController
   #  Not using before filter
   #
   post "/bookmarks" do
-    request.body.rewind
-    params = JSON.parse request.body.read
-    input = hslice params, "url", "title"
+    input, params =  get_json_parms
+    $logger.debug "===> post /bookmarks - params: #{params.inspect}"
     @bookmark = Bookmark.new input
     #
     # A bit of validation with the model constraints
@@ -104,7 +110,6 @@ class BookmarksController < ApplicationController
 
     @example_template = IO.read("views/#{@example}.html")
 
-
     erb :index, layout: false
   end
   #
@@ -156,13 +161,13 @@ class BookmarksController < ApplicationController
   # Update Part - allow partial updates
   # using before filter top get the id and set the @bookmark
   #
-  put %r{/bookmarks/\d+} do
-    input = hslice params, "url", "title"
-    input['url']   = @bookmark.url   if input['url'].nil?
-    input['title'] = @bookmark.title if input['title'].nil?
+  LBD = ->(obj, bookmark) {
+    input, params = obj.get_json_parms
+    input['url']   = bookmark.url   if input['url'].nil?
+    input['title'] = bookmark.title if input['title'].nil?
     #
-    status = if @bookmark.update input
-               add_tags(@bookmark)  # tags update here, using params
+    status = if bookmark.update input
+               obj.add_tags(bookmark, params)
                :ok
              else
                :ko
@@ -172,10 +177,10 @@ class BookmarksController < ApplicationController
     # first match  => halt action to escape the loop
     #
     _json = -1
-    request.accept.each do |type|
+    obj.request.accept.each do |type|
       case type.to_s
       when 'text/html'
-        status == :ok ? halt(erb :bookmark_show) : halt(erb :bookmark_edit, status: 400)
+        status == :ok ? obj.halt(erb :bookmark_show) : obj.halt(erb :bookmark_edit, status: 400)
 
       when 'text/json'
       when 'application/json'
@@ -184,6 +189,14 @@ class BookmarksController < ApplicationController
       end
     end
     _json if _json != -1
+  }
+  
+  put %r{/bookmarks/\d+} do
+    LBD.call(self, @bookmark)
+  end
+  
+  post %r{/bookmarks/\d+} do
+    LBD.call(self, @bookmark)
   end
 
   #

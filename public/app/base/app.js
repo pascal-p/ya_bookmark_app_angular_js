@@ -4,7 +4,9 @@ var app = angular.module("App_base", ["ngResource"]);
 // service named Bookmark that CRUD bookmarks between the client and the server
 //
 app.factory("Bookmark", function($resource) {
-  return $resource("/bookmarks/:id", {id:"@id"});
+  return $resource("/bookmarks/:id", {id:"@id"}
+                   // { "update": { "method": "PUT" } }
+                  );
 });
 
 //
@@ -66,6 +68,17 @@ app.factory("deleteBookmark", function(bookmarks) {
 app.factory("editBookmark", function(state) {
   return function(bookmark) {
     state.formBookmark.bookmark = bookmark;
+    /*
+    bookmark.$update(
+      function success(resp) {
+        console.log("Update Success:" + JSON.stringify(resp));
+        state.clearForm();       
+      },
+      function error(errorResp) {
+        console.log("Update Error:" + JSON.stringify(errorResp));
+      }
+    );
+    */
   };
 });
 

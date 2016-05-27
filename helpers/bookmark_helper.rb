@@ -22,7 +22,7 @@ module BookmarkHelper
   def add_tags(bookmark, params)
     # get the tags
     labels = if params.has_key?('tag_lst') && params['tag_lst'].is_a?(Array)
-               params['tag_lst']
+               params['tag_lst'].map(&:downcase)
              else
                (params["tags_as_str"] || "").split(",").map(&:strip).map(&:downcase).sort
              end
@@ -32,7 +32,7 @@ module BookmarkHelper
     # that previously existed but were not sent in the current request.
     #
     exist_labels = bookmark.bookmark_taggings.inject([]) do |ary, bktagging|
-      if labels.include?(bktagging.tag.label)
+      if bktagging.tag && labels.include?(bktagging.tag.label)
         ary.push bktagging.tag.label
       else
         bktagging.destroy

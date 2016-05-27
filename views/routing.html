@@ -1,0 +1,20 @@
+<div class="col-md-9">
+  <div ng-controller="BookmarkFormController"
+       ng-include src="'/app/routing/bookmark_form.html'">
+  </div>
+
+  <hr />
+  
+  <div ng-controller="TagFilterController"
+       ng-include src="'/app/routing/tag_filter.html'">
+  </div>
+  
+  <div ng-controller="BookmarkListController" ng-view>
+  </div>
+</div>
+
+<div class="col-md-3">
+  <div class="pull-right" ng-controller="TagListController"
+       ng-include src="'/app/routing/tag_list.html'">
+  </div>
+</div>

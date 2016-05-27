@@ -2,7 +2,6 @@ var app = angular.module("App_validation",
                          [
                            "ngResource",
                            "ngMessages",
-                           "App_base",
                            "App_pre_tag_validation",
                            "App_tagfilter"
                          ]);
