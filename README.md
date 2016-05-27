@@ -1,14 +1,13 @@
 # Bookmark mini-APP
 
 A simple JSON API for a bookmark mini app with tags using Sinatra (http://www.sinatrarb.com/)
-Also offers the same basic CRUD functions through the web interface.
+It also offers the CRUD functions through the web interface served from Sinatra
++ Frontend developped with AngularJS
+  
 
 Inspired by book: "Seven Web Frameworks in Seven Weeks" by Jack Moffit and Fred Daoud
   (src: https://pragprog.com/book/7web/seven-web-frameworks-in-seven-weeks)
-    
-## Installation
 
-TODO: 
   
 ## Usage
 
@@ -22,11 +21,9 @@ Clone repository, then
   bundle exec rackup -s thin -p 4567 -o 127.0.0.1
 ```
 
-## Development
+Then point your browser to http://localhost:4567 (redirection to  http://localhost:4567/example/base) 
 
-This is not a gem, as of yet...
+## Other
+May 2016, Pascal.
 
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/pascal_p/ya_bookmark_app
 

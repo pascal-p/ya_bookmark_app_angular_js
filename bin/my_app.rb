@@ -12,9 +12,6 @@ end
 require 'json'
 require 'sinatra/base'           # instead of require 'sinatra' => modular Sinatra App
 #
-#require "sinatra/contrib"
-#require "sinatra/respond_with"   # from sinatra-contrib
-#require 'sinatra/content_for'    #   "    "       "
 require 'sinatra/namespace'
 #
 require 'data_mapper'
