@@ -49,18 +49,6 @@ app.factory("saveBookmark", function(bookmarks, state) {
   };
 });
 
-/*
-app.factory("saveBookmark", function(bookmarks, state) {
-  return function(bookmark) {
-    if (!bookmark.id) {
-      bookmarks.push(bookmark);
-    }
-    bookmark.$save();
-    state.clearForm();
-  };
-});
-*/
-
 //
 // service to delete a bookmark entries (on the backend) and update
 // the (local) bookmark list
