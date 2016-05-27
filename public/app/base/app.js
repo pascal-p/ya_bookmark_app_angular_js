@@ -29,23 +29,22 @@ app.service("state", function(Bookmark) {
 //
 app.factory("saveBookmark", function(bookmarks, state) {
   return function(bookmark) {
-    var new_bk = false,
-        ok = false;
-    if (!bookmark.id) { new_bk = true; }
-    bookmark.$save(
-      function success(response) {
-        console.log("Success:" + JSON.stringify(response));
-        ok = true; // closure
-      },
-      function error(errorResponse) {
-        console.log("Error:" + JSON.stringify(errorResponse));
-      }
-    );
-    if (new_bk && ok) {
+    var ix = -1;
+    if (!bookmark.id) {
       bookmarks.push(bookmark);
-      state.clearForm();         // clear from only if the save on the backend was successfull
-      console.log("ok - adding bookmark to local list and clearing form")
+      ix = bookmarks.indexOf(bookmark);
+      console.log(bookmarks);
     }
+    bookmark.$save(
+      function success(resp) {
+        console.log("Success:" + JSON.stringify(resp));
+        state.clearForm();       
+      },
+      function error(errorResp) {
+        console.log("Error:" + JSON.stringify(errorResp));
+        bookmarks.splice(ix, 1);
+      }
+    );   
   };
 });
 

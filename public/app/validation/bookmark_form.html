@@ -40,6 +40,25 @@
     </div>
   </div>
 
+  <div class="form-group has-feedback"
+       ng-class="{
+                 'has-error': bookForm.tagList.$invalid && bookForm.tagList.$dirty,
+                 'has-success': bookForm.tagList.$valid && bookForm.tagList.$touched
+                 }">
+    <div class="col-sm-2">
+      <label> Tags: <br /> (separated by commas)</label>
+    </div>
+    <div class="col-sm-10">
+      <input type="text" ng-model="formBookmark.bookmark.tag_lst"
+             ng-list name="tagList" class="form-control"
+             required ng-pattern="tagsRegExp" />
+      <p class="help-block" ng-messages="bookForm.tagList.$error">
+        <span ng-message="required">Tag List is required</span>
+        <span ng-message="pattern">Tags must be separated with a comma, ex: foo,bar,goo</span>
+      </p>
+    </div>
+  </div>
+
   <div class="col-sm-10 col-sm-offset-2">
     <input type="submit" class="btn btn-sm btn-primary"
            ng-disabled="bookForm.$invalid || bookForm.$pristine" value="Save">

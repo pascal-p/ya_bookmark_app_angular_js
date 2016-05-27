@@ -1,19 +1,27 @@
-Bookmark Base:
+<strong>Bookmark:</strong>
+
 <form ng-submit="saveBookmark(formBookmark.bookmark)" class="form-horizontal">
-  
+
   <div class="form-group">
-    <label> URL:
-      <input type="url" ng-model="formBookmark.bookmark.url" name="url">
-    </label>
+    <div class="col-sm-2">
+      <label> URL: </label>
+    </div>
+    <div class="col-sm-10">
+      <input type="url" ng-model="formBookmark.bookmark.url" name="url" size="84" />
+    </div>
   </div>
 
   <div class="form-group">
-    <label> Title:
-      <input type="text" ng-model="formBookmark.bookmark.title" name="title">
-    </label>
+    <div class="col-sm-2">
+      <label> Title: </label>
+    </div>
+    <div class="col-sm-10">
+      <input type="text" ng-model="formBookmark.bookmark.title" name="title" size="84" />
+    </div>
   </div>
-    
-  <input type="submit" class="btn btn-sm btn-primary" value="Save">
-  <input type="button" class="btn btn-sm" ng-click="clearForm()" value="Clear">
 
+  <div class="col-sm-10 col-sm-offset-2">
+    <input type="submit" class="btn btn-sm btn-primary" value="Save">
+    <input type="button" class="btn btn-sm" ng-click="clearForm()" value="Clear">
+  </div>
 </form>

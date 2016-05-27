@@ -1,13 +1,14 @@
-var app = angular.module("App_pre_tag_validation",
+var app = angular.module("App_validation",
                          [
                            "ngResource",
                            "ngMessages",
-                           "App_base"
+                           "App_base",
+                           "App_pre_tag_validation",
+                           "App_tagfilter"
                          ]);
 
-
-app.factory("urlRegExp", function() {
-  return /^http(s)?:\/\/(\w+:{0,1}\w*@)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
+app.factory("tagsRegExp", function() {
+  return /^\w+\s*$|^\w+\s*,[\s*\w+,]+$/;
 });
 
 //
@@ -42,10 +43,12 @@ app.factory("saveBookmark", function(bookmarks, state) {
 // Controller for the bookmark form
 //
 app.controller("BookmarkFormController",
-  function($scope, state, urlRegExp, bookmarks, saveBookmark) {
+  function($scope, state, tagsRegExp, bookmarks, saveBookmark) {
     $scope.formBookmark = state.formBookmark;
-    $scope.urlRegExp    = urlRegExp;
+    $scope.tagsRegExp   = tagsRegExp;
     $scope.saveBookmark = saveBookmark;
-    $scope.clearForm = state.clearForm;
+    $scope.clearForm    = state.clearForm;
   }
 );
+
+//

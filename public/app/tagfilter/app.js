@@ -8,7 +8,6 @@ app.service("state", function(Bookmark) {
   this.clearForm = function() {
     this.formBookmark.bookmark = new Bookmark();
   };
-
   this.bookmarkFilter = {filterTag:""};
 });
 
@@ -21,7 +20,7 @@ app.factory("buildTagList", function() {
         labels;
 
     bookmarks.forEach(function(bookmark) {
-      var tagList = bookmark.tag_lst;
+      var tagList = bookmark.tag_lst || [];
 
       tagList.forEach(function(tag) {
         var existing = bookmarkCounts[tag];

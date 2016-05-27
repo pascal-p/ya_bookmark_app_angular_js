@@ -41,6 +41,7 @@ class BookmarksController < ApplicationController
     params = JSON.parse request.body.read
     input = hslice params, "url", "title"
     @bookmark = Bookmark.new input
+    #
     # A bit of validation with the model constraints
     status = if @bookmark.save
                add_tags(@bookmark, params)
@@ -63,7 +64,9 @@ class BookmarksController < ApplicationController
         # 400 == Bad request
         # OK: [201, "/bookmarks/#{bookmark['id']}"]
         #
-        _json = (status == :ok) ? [201, "/bookmarks/#{@bookmark['id']}"] : 400
+        # _json = (status == :ok) ? ({status: 201, message: @bookmark}.to_json with_tag_list) :
+        _json = (status == :ok) ? @bookmark.to_json(with_tag_list) :
+                  { status: 400, message: "error" }.to_json
         break
       end
     end
@@ -87,6 +90,7 @@ class BookmarksController < ApplicationController
       {example: "base", label:  "Base"},
       {example: "pre_tag_validation", label: "Pre Tag Validation"},
       {example: "tagfilter", label: "Tag Filter"},
+      {example: "validation", label: "Validation"},
       {example: "routing", label: "Routing"}
     ]
     @example = params[:example]
